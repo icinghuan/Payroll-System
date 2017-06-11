@@ -12,7 +12,7 @@ MySQL - 5.0.18-nt : Database - payroll
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`payroll` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`payroll` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `payroll`;
 
@@ -26,7 +26,7 @@ CREATE TABLE `admin` (
   `id` int(10) unsigned NOT NULL auto_increment COMMENT '管理员编号',
   PRIMARY KEY  (`account`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `admin` */
 
@@ -54,7 +54,7 @@ CREATE TABLE `employee` (
   `hourlimit` int(10) unsigned NOT NULL COMMENT '工作时长限制',
   PRIMARY KEY  (`account`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `employee` */
 
@@ -71,7 +71,7 @@ CREATE TABLE `perference` (
   `bankaccount` varchar(24) default NULL COMMENT '银行账户',
   `bankname` varchar(24) default NULL COMMENT '账户姓名',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `perference` */
 
@@ -91,7 +91,7 @@ CREATE TABLE `purchaseorder` (
   `amount` int(11) unsigned NOT NULL COMMENT '销售数额',
   `status` varchar(6) default 'open' COMMENT '订单状态（未完成为open，完成为closed）',
   PRIMARY KEY  (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `purchaseorder` */
 
@@ -108,7 +108,7 @@ CREATE TABLE `record` (
   `amount` int(11) NOT NULL COMMENT '支付数额',
   `status` varchar(4) NOT NULL default 'no' COMMENT '支付状态（未支付为no，已支付为yes）',
   PRIMARY KEY  (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `record` */
 
@@ -133,7 +133,7 @@ CREATE TABLE `timecard` (
   `chargenum` int(11) default '0' COMMENT '记账编号（记账编号为0位其他编号之和的统计）',
   `status` varchar(12) NOT NULL default 'no' COMMENT '提交状态（未提交为no，已提交为submitted）',
   PRIMARY KEY  (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `timecard` */
 
@@ -147,7 +147,7 @@ CREATE TABLE `vacation` (
   `id` int(10) unsigned NOT NULL COMMENT '员工编号',
   `ramain` int(10) unsigned default '0' COMMENT '剩余假期',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `vacation` */
 
@@ -160,7 +160,7 @@ DROP TABLE IF EXISTS `waitdelete`;
 CREATE TABLE `waitdelete` (
   `id` int(10) unsigned NOT NULL COMMENT '员工编号',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `waitdelete` */
 
