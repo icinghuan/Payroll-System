@@ -256,7 +256,7 @@ namespace Payroll_System_Client
             }
             else
             {
-                //MessageBox.Show(rec);
+                MessageBox.Show(rec);
                 textBox1.Text = strList[1];
                 textBox2.Text = strList[2];
                 textBox3.Text = strList[3];

@@ -54,8 +54,8 @@ namespace Payroll_System_Server
                     if (receiveNumber <= 0)
                         break;
                     Console.WriteLine("接收客户端 {0} 消息 {1}", myClientSocket.RemoteEndPoint.ToString(), Encoding.ASCII.GetString(result, 0, receiveNumber));
-                    string str = Encoding.ASCII.GetString(result, 0, receiveNumber);
-                    myClientSocket.Send(Encoding.ASCII.GetBytes(Message.rec(str)));
+                    string str = Encoding.UTF8.GetString(result, 0, receiveNumber);
+                    myClientSocket.Send(Encoding.UTF8.GetBytes(Message.rec(str)));
                 }
                 catch (Exception ex)
                 {

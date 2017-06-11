@@ -45,7 +45,7 @@ namespace Payroll_System_Client
             //通过 clientSocket 发送数据  
             try
             {
-                clientSocket.Send(Encoding.ASCII.GetBytes(sendMessage));
+                clientSocket.Send(Encoding.UTF8.GetBytes(sendMessage));
             }
             catch
             {
@@ -60,7 +60,7 @@ namespace Payroll_System_Client
             {
                 //接收不到信息时会阻塞线程，用多线程执行，多线程出错，待解决-------------从改用多线程到放弃。。。
                 int receiveLength = clientSocket.Receive(result);
-                receiveMessage = Encoding.ASCII.GetString(result, 0, receiveLength);
+                receiveMessage = Encoding.UTF8.GetString(result, 0, receiveLength);
             }
             catch (Exception ex)
             {

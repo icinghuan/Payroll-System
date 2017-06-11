@@ -181,7 +181,8 @@ namespace Payroll_System_Server
                     using (var db = new payrollEntities())
                     {
                         var i = db.Database.SqlQuery<purchaseorder>(sql).Single();
-                        return i.id.ToString() + " " + i.contact + " " + i.address + " " + i.product + " " + i.date.GetDateTimeFormats()[0] + " " + i.amount.ToString() + " " + i.status;
+                        //Console.WriteLine(i.id.ToString() + " " + i.contact + " " + i.address + " " + i.product + " " + i.date.GetDateTimeFormats()[0] + " " + i.amount.ToString() + " " + i.status);
+                        return i.id.ToString() + " " + i.contact + " " + i.address + " " + i.product + " " + i.date.GetDateTimeFormats()[0] + " " + i.amount.ToString() + " " + i.status;                        
                     }
                 }
                 catch (Exception ex)
