@@ -1,0 +1,35 @@
+配置文件说明
+
+	mysqlSetup.exe 
+		安装Mysql 5.0的安装包
+			Mysql配置：
+				用户：root
+				密码：19961011(这里修改密码的话vs里面连接到数据库的密码也要一起改)
+				端口：3306(默认端口)
+
+	SQLyog_Enterprise+8.14.rar
+		SQLyog是一个快速而简洁的图形化管理MYSQL数据库的工具
+
+	payroll.sql&project.sql
+		用SQLyog可以导入该sql文件，创建数据库，对应本系统数据库及项目管理数据库(外部数据库)
+
+	开发环境：Visual Studio 2015
+	开发语言：C#
+
+	mysql-connector-net-6.9.9.exe
+	mysql-for-visualstudio-1.2.7.exe
+		vs连接到mysql数据库的文件
+
+Payroll System
+
+	Payroll System Server
+		系统的服务端，接收客户端的信息并处理，返回给客户端信息，服务端执行数据库连接，sql查询或执行，自动运行工资生成与支付程序。采用命令行界面，输出服务器运行信息。
+
+	Payroll System Client
+		系统的客户端，提供可登录的图形化界面，登录到管理员界面或员工界面，进行不同的操作，与服务器通讯之后解析服务器返回的信息，反馈到图形化界面之上。
+
+
+
+				time 2017.6.11
+
+
