@@ -73,7 +73,7 @@ namespace Payroll_System_Server
             DateTime now = DateTime.Now;
             using (var db = new payrollEntities())//每小时检查一次未支付账单，支付（这里就是为了防止银行系统无法连接，所以每小时检查一次）
             {
-                var records = db.Database.SqlQuery<record>("select * from record where status = 'no'");
+                var records = db.Database.SqlQuery<record>("select * from record where `status` = 'no'");
                 foreach (var r in records)
                 {
                     int id = r.id;
@@ -95,7 +95,7 @@ namespace Payroll_System_Server
                         Delete(id);//查询该员工是否需要删除
                         using (var db2 = new payrollEntities())
                         {
-                            db2.Database.ExecuteSqlCommand("update record set status = 'yes' where pid = '" + r.pid + "'");
+                            db2.Database.ExecuteSqlCommand("update record set `status` = 'yes' where pid = '" + r.pid + "'");
                         }
                     }
                     if (p.payment == "mail")//邮寄支票
@@ -106,7 +106,7 @@ namespace Payroll_System_Server
                         Delete(id);//查询该员工是否需要删除
                         using (var db2 = new payrollEntities())
                         {
-                            db2.Database.ExecuteSqlCommand("update record set status = 'yes' where pid = '" + r.pid + "'");
+                            db2.Database.ExecuteSqlCommand("update record set `status` = 'yes' where pid = '" + r.pid + "'");
                         }
                     }
                     if (p.payment == "deposit")//存入银行账户
@@ -118,7 +118,7 @@ namespace Payroll_System_Server
                             Delete(id);//查询该员工是否需要删除
                             using (var db2 = new payrollEntities())
                             {
-                                db2.Database.ExecuteSqlCommand("update record set status = 'yes' where pid = '" + r.pid + "'");
+                                db2.Database.ExecuteSqlCommand("update record set `status` = 'yes' where pid = '" + r.pid + "'");
                             }
                         }
                     }
@@ -154,7 +154,7 @@ namespace Payroll_System_Server
                         int paya = Convert.ToInt32(Convert.ToInt64(pay) - e.tax - e.pension - e.medical);
                         using (var db2 = new payrollEntities())
                         {
-                            db2.Database.ExecuteSqlCommand("insert into record (id,date,amount,status) values ('" + e.id + "','" + now.ToString() + "','" + paya.ToString() + "','no')");//生成工资记录，no表示尚未支付
+                            db2.Database.ExecuteSqlCommand("insert into record (id,date,amount,`status`) values ('" + e.id + "','" + now.ToString() + "','" + paya.ToString() + "','no')");//生成工资记录，no表示尚未支付
                         }
                     }
                 }
@@ -172,7 +172,7 @@ namespace Payroll_System_Server
                         int paya = Convert.ToInt32(Convert.ToInt64(e.salary) - e.tax - e.pension - e.medical);
                         using (var db2 = new payrollEntities())
                         {
-                            db2.Database.ExecuteSqlCommand("insert into record (id,date,amount,status) values ('" + e.id + "','" + now.ToString() + "','" + paya.ToString() + "','no')");//生成工资记录，no表示尚未支付
+                            db2.Database.ExecuteSqlCommand("insert into record (id,date,amount,`status`) values ('" + e.id + "','" + now.ToString() + "','" + paya.ToString() + "','no')");//生成工资记录，no表示尚未支付
                         }
                     }
                 }
@@ -186,20 +186,20 @@ namespace Payroll_System_Server
                         pay = Convert.ToDouble(Convert.ToInt64(e.salary) - e.tax - e.pension - e.medical);
                         using (var db2 = new payrollEntities())
                         {
-                            var ps = db2.Database.SqlQuery<purchaseorder>("select * from purchaseorder where id = '" + e.id + "' and status = 'open'");
+                            var ps = db2.Database.SqlQuery<purchaseorder>("select * from purchaseorder where id = '" + e.id + "' and `status` = 'open'");
                             foreach (var p in ps)
                             {
                                 pay += Convert.ToDouble(p.amount) * Convert.ToDouble(e.commissionedrate);
                                 using (var db3 = new payrollEntities())
                                 {
-                                    db3.Database.ExecuteSqlCommand("update purchaseorder set status = 'closed' where pid = '" + p.pid + "'");
+                                    db3.Database.ExecuteSqlCommand("update purchaseorder set `status` = 'closed' where pid = '" + p.pid + "'");
                                 }
                             }                            
                         }
                         int paya = Convert.ToInt32(pay);
                         using (var db2 = new payrollEntities())
                         {
-                            db2.Database.ExecuteSqlCommand("insert into record (id,date,amount,status) values ('" + e.id + "','" + now.ToString() + "','" + paya.ToString() + "','no')");//生成工资记录，no表示尚未支付
+                            db2.Database.ExecuteSqlCommand("insert into record (id,date,amount,`status`) values ('" + e.id + "','" + now.ToString() + "','" + paya.ToString() + "','no')");//生成工资记录，no表示尚未支付
                         }
                     }
                 }

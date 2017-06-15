@@ -261,14 +261,14 @@ namespace Payroll_System_Server
                 DateTime fri = Clock.GetWeekLastDayFri();
                 //Console.WriteLine(mon);
                 //Console.WriteLine(fri);
-                sql = "select * from timecard where id = '" + strList[1] + "' and begin = '" + mon + "' and end = '" + fri + "'";
+                sql = "select * from timecard where id = '" + strList[1] + "' and `begin` = '" + mon + "' and `end` = '" + fri + "'";
                 try
                 {
                     using (var db = new payrollEntities())
                     {
                         if (db.Database.SqlQuery<timecard>(sql).Count<timecard>() == 0)
                         {
-                            db.Database.ExecuteSqlCommand("insert into timecard (id,begin,end,status) values ('" + strList[1] + "','" + mon + "','" + fri + "','submitted')");                            
+                            db.Database.ExecuteSqlCommand("insert into timecard (id,`begin`,`end`,`status`) values ('" + strList[1] + "','" + mon + "','" + fri + "','submitted')");                            
                         }
                         string re = mon + " " + fri;
                         using (var db2 = new projectmanagementEntities())
@@ -291,14 +291,14 @@ namespace Payroll_System_Server
 
             if (strList[0] == "12")//select timecard 查询考勤表，根据记账编号查询考勤表
             {
-                sql = "select * from timecard where id = '" + strList[1] + "' and begin = '" + strList[3] + "' and end = '" + strList[5] + "' and chargenum = '" + strList[2] + "'";
+                sql = "select * from timecard where id = '" + strList[1] + "' and `begin` = '" + strList[3] + "' and `end` = '" + strList[5] + "' and chargenum = '" + strList[2] + "'";
                 try
                 {
                     using (var db = new payrollEntities())
                     {
                         if (db.Database.SqlQuery<timecard>(sql).Count<timecard>() == 0)
                         {
-                            db.Database.ExecuteSqlCommand("insert into timecard （id,begin,end,chargenum) values ('" + strList[1] + "','" + strList[3] + "','" + strList[5] + "','"+strList[2]+"')");
+                            db.Database.ExecuteSqlCommand("insert into timecard (id,`begin`,`end`,chargenum) values ('" + strList[1] + "','" + strList[3] + "','" + strList[5] + "','"+strList[2]+"')");
                         }
                         var i = db.Database.SqlQuery<timecard>(sql).Single();
                         string re = "";
@@ -342,7 +342,7 @@ namespace Payroll_System_Server
                         var t0 = db.Database.SqlQuery<timecard>("select * from timecard where tid = '" + strList[6] + "'").Single();
                         var e0 = db.Database.SqlQuery<employee>("select * from employee where id = '" + t0.id + "'").Single();
                         int hourlimit = Convert.ToInt32(e0.hourlimit);
-                        var i0 = db.Database.SqlQuery<timecard>("select * from timecard where chargenum = '0' and id = '" + t0.id + "' and begin = '" + t0.begin + "' and end = '" + t0.end + "'").Single();
+                        var i0 = db.Database.SqlQuery<timecard>("select * from timecard where chargenum = '0' and id = '" + t0.id + "' and `begin` = '" + t0.begin + "' and end = '" + t0.end + "'").Single();
                         long[] a0 = new long[5];
                         a0[0] = i0.mon+long.Parse(strList[1]);
                         a0[1] = i0.tue + long.Parse(strList[2]);
@@ -355,9 +355,9 @@ namespace Payroll_System_Server
                             if (a0[i] > hourlimit)
                                 return (i+1).ToString();
                         DateTime now = DateTime.Now;
-                        sql = "update timecard set status = 'submitted',time = '"+time+"',subtime = '" + now.ToString() + "',mon = '" + strList[1] + "',tue = '" + strList[2] + "',wed = '" + strList[3] + "',thu = '" + strList[4] + "',fri = '" + strList[5] + "' where tid = '" + strList[6] + "'";
+                        sql = "update timecard set `status` = 'submitted',time = '"+time+"',subtime = '" + now.ToString() + "',mon = '" + strList[1] + "',tue = '" + strList[2] + "',wed = '" + strList[3] + "',thu = '" + strList[4] + "',fri = '" + strList[5] + "' where tid = '" + strList[6] + "'";
                         db.Database.ExecuteSqlCommand(sql);
-                        sql = "update timecard set time = '"+atime+"',mon = '" + a0[0] + "',tue = '" + a0[1] + "',wed = '" + a0[2] + "',thu = '" + a0[3] + "',fri = '" + a0[4] + "' where chargenum = '0' and id = '" + t0.id + "' and begin = '" + t0.begin + "' and end = '" + t0.end + "'";
+                        sql = "update timecard set time = '"+atime+"',mon = '" + a0[0] + "',tue = '" + a0[1] + "',wed = '" + a0[2] + "',thu = '" + a0[3] + "',fri = '" + a0[4] + "' where chargenum = '0' and id = '" + t0.id + "' and `begin` = '" + t0.begin + "' and `end` = '" + t0.end + "'";
                         db.Database.ExecuteSqlCommand(sql);
                         return "ok";
                     }
